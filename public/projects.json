@@ -1,0 +1,31 @@
+[
+  {
+    "id": "1",
+    "slug": "e-commerce",
+    "title": "E-commerce",
+    "description": "Plataforma de comercio electrónico con gestión de productos, carrito y pagos.",
+    "stack": ["Angular", "Spring Boot", "SQL Server"],
+    "cover": "/projects/e-commerce/login_ecommerce.png",
+    "images": [
+      "/projects/e-commerce/carrito.png",
+      "/projects/e-commerce/carrito2.png",
+      "/projects/e-commerce/categorias.png",
+      "/projects/e-commerce/cliente_ordenes.png",
+      "/projects/e-commerce/crear_producto.png"
+    ]
+  },
+  {
+    "id": "2",
+    "slug": "gestion-estudiantil",
+    "title": "Gestión Estudiantil",
+    "description": "Aplicación web para gestión de estudiantes, materias y profesores.",
+    "stack": ["Angular", ".NET", "PostgreSQL"],
+    "cover": "/projects/gestion_estudiantil/login.png",
+    "images": [
+      "/projects/gestion_estudiantil/asignacion_materias.png",
+      "/projects/gestion_estudiantil/gestion_usuarios.png",
+      "/projects/gestion_estudiantil/inscripcion_materias.png",
+      "/projects/gestion_estudiantil/materias_estudiante.png"
+    ]
+  }
+]

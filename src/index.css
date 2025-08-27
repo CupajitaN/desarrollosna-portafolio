@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+:root {
+  --brand-bg: #0A192F;
+  --brand-deep: #0F2747;
+}
+
+html, body, #root { height: 100%; }
+
+body {
+  background: linear-gradient(180deg, var(--brand-bg) 0%, var(--brand-deep) 100%);
+}
