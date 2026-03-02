@@ -3,7 +3,7 @@ import { useProjectBySlug } from "../../hooks/useProjectBySlug";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { useState } from "react";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiExternalLink } from "react-icons/fi";
 import { Seo } from "../components/seo/Seo";
 
 export function ProjectDetailPage() {
@@ -41,6 +41,18 @@ export function ProjectDetailPage() {
       <h1 className="text-3xl md:text-4xl font-bold mt-4">{project.title}</h1>
       <p className="text-slate-300 mt-2">{project.description}</p>
       <div className="text-slate-400 text-sm mt-1">{project.stack.join(" • ")}</div>
+
+      {project.url && (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-brand-accent/10 text-brand-accent border border-brand-accent/30 hover:bg-brand-accent/20 transition-colors text-sm font-medium"
+        >
+          <FiExternalLink className="w-4 h-4" />
+          Ver proyecto en producción
+        </a>
+      )}
 
       {/* Carrusel */}
       <div className="relative mt-8">

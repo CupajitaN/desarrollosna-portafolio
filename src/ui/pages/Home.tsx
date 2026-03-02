@@ -5,7 +5,10 @@ import { Hero } from "../components/sections/Hero";
 import { Services } from "../components/sections/Services";
 import { About } from "../components/sections/About";
 import { TechStack } from "../components/sections/TechStack";
+import { CtaBanner } from "../components/sections/CtaBanner";
 import { Seo } from "../components/seo/Seo";
+import { FloatingWhatsApp } from "../components/common/FloatingWhatsApp";
+import { ScrollToTopButton } from "../components/common/ScrollToTopButton";
 
 export default function Home() {
   const location = useLocation();
@@ -33,6 +36,9 @@ export default function Home() {
       <section id="proyectos"><Projects /></section>
       <TechStack />
       <section id="sobre-mi"><About /></section>
+      <CtaBanner />
+      <FloatingWhatsApp />
+      <ScrollToTopButton />
     </>
   );
 }

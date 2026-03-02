@@ -6,4 +6,5 @@ export interface Project {
   stack: string[];
   cover: string;
   images: string[];
+  url?: string;
 }

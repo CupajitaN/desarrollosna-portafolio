@@ -27,5 +27,35 @@
       "/projects/gestion_estudiantil/inscripcion_materias.png",
       "/projects/gestion_estudiantil/materias_estudiante.png"
     ]
+  },
+  {
+    "id": "3",
+    "slug": "menteaccesible",
+    "title": "MenteAccesible",
+    "description": "Aplicación web de directorio público de salud mental para encontrar y buscar ayuda profesional cuando se necesite.",
+    "stack": ["React", "Next.js"],
+    "cover": "/projects/menteaccesible/MenteAccesible.png",
+    "url": "https://menteaccesible.org",
+    "images": [
+      "/projects/menteaccesible/MenteAccesible.png",
+      "/projects/menteaccesible/MenteAccesible2.png",
+      "/projects/menteaccesible/MenteAccesible3.png",
+      "/projects/menteaccesible/MenteAccesible4.png"
+    ]
+  },
+  {
+    "id": "4",
+    "slug": "mazal-tov",
+    "title": "Mazal Tov Café",
+    "description": "Landing page para un café ubicado en la ciudad de Ibagué.",
+    "stack": ["React", "Next.js"],
+    "cover": "/projects/mazal-tov/mazal.png",
+    "url": "https://mazal-cafe.org",
+    "images": [
+      "/projects/mazal-tov/mazal.png",
+      "/projects/mazal-tov/mazal2.png",
+      "/projects/mazal-tov/mazal3.png",
+      "/projects/mazal-tov/mazal4.png"
+    ]
   }
 ]

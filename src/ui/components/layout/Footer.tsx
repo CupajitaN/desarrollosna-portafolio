@@ -16,7 +16,7 @@ export function Footer() {
             <Rocket className="w-4 h-4 text-brand-accent" /> Desarrollo web a la medida
           </p>
           <p className="flex items-center gap-2">
-            <Mail className="w-4 h-4 text-brand-accent" /> cupajitan@desarrolloscn.com
+            <Mail className="w-4 h-4 text-brand-accent" /> nicolas.cupajita@gmail.com
           </p>
           <p className="flex items-center gap-2">
             <Phone className="w-4 h-4 text-brand-accent" /> +57 310 6408460
@@ -25,10 +25,10 @@ export function Footer() {
 
         {/* Redes */}
         <div className="flex gap-4 text-sm">
-          <a href="https://www.instagram.com/desarrollosna" target="_blank" className="flex items-center gap-1 hover:text-brand-accent">
+          <a href="https://www.instagram.com/desarrollosna" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-brand-accent">
             <Instagram className="w-4 h-4" /> Instagram
           </a>
-          <a href="https://wa.me/573106408460" target="_blank" className="flex items-center gap-1 hover:text-brand-accent">
+          <a href="https://wa.me/573106408460" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-brand-accent">
             <MessageCircle className="w-4 h-4" /> WhatsApp
           </a>
         </div>
