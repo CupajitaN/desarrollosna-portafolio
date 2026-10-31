@@ -24,6 +24,8 @@ export function DIProvider({ children }: { children: ReactNode }) {
   return <DIContext.Provider value={services}>{children}</DIContext.Provider>;
 }
 
+// El hook vive junto a su Provider a propósito: comparten el contexto privado
+// eslint-disable-next-line react-refresh/only-export-components
 export function useServices(): Services {
   const ctx = useContext(DIContext);
   if (!ctx) throw new Error("useServices must be used within DIProvider");

@@ -5,13 +5,24 @@
     "title": "E-commerce",
     "description": "Plataforma de comercio electrónico con gestión de productos, carrito y pagos.",
     "stack": ["Angular", "Spring Boot", "SQL Server"],
-    "cover": "/projects/e-commerce/login_ecommerce.png",
+    "cover": "/projects/e-commerce/cover.webp",
     "images": [
-      "/projects/e-commerce/carrito.png",
-      "/projects/e-commerce/carrito2.png",
-      "/projects/e-commerce/categorias.png",
-      "/projects/e-commerce/cliente_ordenes.png",
-      "/projects/e-commerce/crear_producto.png"
+      "/projects/e-commerce/tienda.webp",
+      "/projects/e-commerce/detalle_articulo.webp",
+      "/projects/e-commerce/carrito2.webp",
+      "/projects/e-commerce/pago_carrito1.webp",
+      "/projects/e-commerce/pago_carrito2.webp",
+      "/projects/e-commerce/pago_carrito3.webp",
+      "/projects/e-commerce/panel_admin.webp",
+      "/projects/e-commerce/productos.webp",
+      "/projects/e-commerce/crear_producto.webp",
+      "/projects/e-commerce/inventario.webp",
+      "/projects/e-commerce/ordenes.webp",
+      "/projects/e-commerce/reportes.webp",
+      "/projects/e-commerce/categorias.webp",
+      "/projects/e-commerce/gestion_usuarios.webp",
+      "/projects/e-commerce/panel_cliente.webp",
+      "/projects/e-commerce/cliente_ordenes.webp"
     ]
   },
   {
@@ -20,12 +31,17 @@
     "title": "Gestión Estudiantil",
     "description": "Aplicación web para gestión de estudiantes, materias y profesores.",
     "stack": ["Angular", ".NET", "PostgreSQL"],
-    "cover": "/projects/gestion_estudiantil/login.png",
+    "cover": "/projects/gestion_estudiantil/cover.webp",
     "images": [
-      "/projects/gestion_estudiantil/asignacion_materias.png",
-      "/projects/gestion_estudiantil/gestion_usuarios.png",
-      "/projects/gestion_estudiantil/inscripcion_materias.png",
-      "/projects/gestion_estudiantil/materias_estudiante.png"
+      "/projects/gestion_estudiantil/panel_admin.webp",
+      "/projects/gestion_estudiantil/gestion_estudiantes.webp",
+      "/projects/gestion_estudiantil/gestion_materias.webp",
+      "/projects/gestion_estudiantil/asignacion_materias.webp",
+      "/projects/gestion_estudiantil/gestion_usuarios.webp",
+      "/projects/gestion_estudiantil/creacion_usuario.webp",
+      "/projects/gestion_estudiantil/panel_profresor.webp",
+      "/projects/gestion_estudiantil/materias_estudiante.webp",
+      "/projects/gestion_estudiantil/inscripcion_materias.webp"
     ]
   },
   {
@@ -34,13 +50,13 @@
     "title": "MenteAccesible",
     "description": "Aplicación web de directorio público de salud mental para encontrar y buscar ayuda profesional cuando se necesite.",
     "stack": ["React", "Next.js"],
-    "cover": "/projects/menteaccesible/MenteAccesible.png",
+    "cover": "/projects/menteaccesible/cover.webp",
     "url": "https://menteaccesible.org",
     "images": [
-      "/projects/menteaccesible/MenteAccesible.png",
-      "/projects/menteaccesible/MenteAccesible2.png",
-      "/projects/menteaccesible/MenteAccesible3.png",
-      "/projects/menteaccesible/MenteAccesible4.png"
+      "/projects/menteaccesible/MenteAccesible.webp",
+      "/projects/menteaccesible/MenteAccesible2.webp",
+      "/projects/menteaccesible/MenteAccesible3.webp",
+      "/projects/menteaccesible/MenteAccesible4.webp"
     ]
   },
   {
@@ -49,13 +65,13 @@
     "title": "Mazal Tov Café",
     "description": "Landing page para un café ubicado en la ciudad de Ibagué.",
     "stack": ["React", "Next.js"],
-    "cover": "/projects/mazal-tov/mazal.png",
+    "cover": "/projects/mazal-tov/cover.webp",
     "url": "https://mazal-cafe.org",
     "images": [
-      "/projects/mazal-tov/mazal.png",
-      "/projects/mazal-tov/mazal2.png",
-      "/projects/mazal-tov/mazal3.png",
-      "/projects/mazal-tov/mazal4.png"
+      "/projects/mazal-tov/mazal.webp",
+      "/projects/mazal-tov/mazal2.webp",
+      "/projects/mazal-tov/mazal3.webp",
+      "/projects/mazal-tov/mazal4.webp"
     ]
   }
 ]

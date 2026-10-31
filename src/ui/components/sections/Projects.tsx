@@ -1,86 +1,102 @@
 import { Link } from "react-router-dom";
 import { useProjects } from "../../../hooks/useProjects";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 import { ProjectSkeleton } from "../common/ProjectSkeleton";
+import { SectionHeading } from "../common/SectionHeading";
 import { motion } from "framer-motion";
 
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
-};
+// Patrón bento: grande, pequeño, pequeño, grande...
+const spans = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"];
 
 export function Projects() {
   const { data, loading, error } = useProjects();
 
-  if (error) return <p className="text-red-400">Error cargando proyectos</p>;
-
   return (
-    <section id="proyectos" className="py-20 px-4 md:px-8 max-w-6xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-      >
-        <h2 className="text-3xl md:text-4xl font-bold">PROYECTOS</h2>
-        <div className="h-[3px] w-24 mt-4 bg-brand-accent" />
-      </motion.div>
+    <section id="proyectos" className="py-24 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
+      <SectionHeading
+        eyebrow="Proyectos"
+        title={<>Trabajo real, <span className="text-gradient">resultados reales</span></>}
+        description="Una selección de plataformas, aplicaciones y sitios que he diseñado y desarrollado de punta a punta."
+      />
 
-      <div className="mt-10 rounded-2xl bg-white/5 backdrop-blur-sm p-8 shadow-lg border border-white/10">
-        {loading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Array.from({ length: 3 }).map((_, i) => <ProjectSkeleton key={i} />)}
+      <div className="mt-14">
+        {error ? (
+          <p className="text-red-400">No se pudieron cargar los proyectos. Intenta recargar la página.</p>
+        ) : loading ? (
+          <div className="grid md:grid-cols-2 gap-5">
+            {Array.from({ length: 4 }).map((_, i) => <ProjectSkeleton key={i} />)}
           </div>
         ) : !data || data.length === 0 ? (
-          <p className="text-slate-300">Pronto compartiré proyectos.</p>
+          <p className="text-slate-400">Pronto compartiré proyectos.</p>
         ) : (
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-            variants={container}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-          >
-            {data.map((p) => (
-              <motion.div key={p.id} variants={item}>
+          <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-5">
+            {data.map((p, i) => (
+              <motion.article
+                key={p.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.6, delay: (i % 2) * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className={spans[i % spans.length]}
+              >
                 <Link
                   to={`/proyectos/${p.slug}`}
-                  className="group block rounded-2xl overflow-hidden bg-slate-900/60 border border-slate-800 hover:border-brand-accent/50 transition-all duration-300 hover:shadow-xl hover:shadow-brand-accent/10 hover:-translate-y-1"
+                  onMouseEnter={(e) => { e.currentTarget.querySelector("video")?.play().catch(() => {}); }}
+                  onMouseLeave={(e) => { e.currentTarget.querySelector("video")?.pause(); }}
+                  className="group relative flex flex-col h-full rounded-3xl overflow-hidden border border-white/10 bg-white/[0.03] hover:border-brand-accent/40 transition-colors duration-500"
                 >
-                  <div className="aspect-video overflow-hidden bg-slate-800/80">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-brand-surface">
                     <img
                       src={p.cover}
-                      alt={p.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      alt={`Captura del proyecto ${p.title}`}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                       loading="lazy"
+                      decoding="async"
                     />
+                    {p.video && (
+                      <video
+                        src={p.video}
+                        poster={p.cover}
+                        muted
+                        loop
+                        playsInline
+                        preload="none"
+                        aria-hidden
+                        className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-brand-bg/20 to-transparent" />
+                    {p.url && (
+                      <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-brand-bg/80 backdrop-blur px-3 py-1 text-xs font-medium text-emerald-300 border border-white/10">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> En producción
+                      </span>
+                    )}
+                    <span className="absolute top-4 right-4 grid place-items-center w-11 h-11 rounded-full bg-white text-brand-bg opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                      <FiArrowUpRight className="w-5 h-5" />
+                    </span>
                   </div>
-                  <div className="p-5">
-                    <h4 className="font-semibold text-white">{p.title}</h4>
-                    <p className="text-slate-400 text-sm mt-1 line-clamp-2">{p.description}</p>
-                    <div className="flex flex-wrap gap-1.5 mt-3">
+
+                  <div className="relative -mt-14 p-6 md:p-7 flex flex-col flex-1">
+                    <span className="font-mono text-xs text-slate-500">0{i + 1}</span>
+                    <h3 className="mt-1 text-2xl font-bold text-white group-hover:text-brand-cyan transition-colors">
+                      {p.title}
+                    </h3>
+                    <p className="text-slate-400 text-sm mt-2 line-clamp-2 flex-1">{p.description}</p>
+                    <div className="flex flex-wrap gap-2 mt-5">
                       {p.stack.map((tech) => (
                         <span
                           key={tech}
-                          className="text-xs px-2 py-0.5 rounded-full bg-brand-accent/10 text-brand-accent border border-brand-accent/20"
+                          className="text-xs px-2.5 py-1 rounded-full bg-white/[0.05] text-slate-300 border border-white/10"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                    <div className="flex items-center gap-1 mt-4 text-brand-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      Ver proyecto <FiArrowRight className="w-4 h-4" />
-                    </div>
                   </div>
                 </Link>
-              </motion.div>
+              </motion.article>
             ))}
-          </motion.div>
+          </div>
         )}
       </div>
     </section>

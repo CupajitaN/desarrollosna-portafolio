@@ -1,11 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.desarrollosna.com/</loc>
+    <loc>https://www.desarrolloscn.com/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.desarrollosna.com/proyectos</loc>
+    <loc>https://www.desarrolloscn.com/contacto</loc>
+    <lastmod>2026-10-30</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.desarrollosna.com/contacto</loc>
+    <loc>https://www.desarrolloscn.com/proyectos/e-commerce</loc>
+    <lastmod>2026-10-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.desarrolloscn.com/proyectos/gestion-estudiantil</loc>
+    <lastmod>2026-10-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.desarrolloscn.com/proyectos/mazal-tov</loc>
+    <lastmod>2026-10-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.desarrolloscn.com/proyectos/menteaccesible</loc>
+    <lastmod>2026-10-30</lastmod>
+    <priority>0.8</priority>
   </url>
 </urlset>

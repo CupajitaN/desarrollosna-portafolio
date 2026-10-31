@@ -5,20 +5,25 @@ const path = require("path");
 // 1) Config
 const ROOT = process.cwd();
 const PUBLIC_DIR = path.join(ROOT, "public");
-const PROJECTS_JSON = path.join(PUBLIC_DIR, "projects", "projects.json");
+const PROJECTS_JSON = path.join(PUBLIC_DIR, "projects.json");
 
-// Define tu dominio (mejor desde env)
-const SITE_URL =
+// Normaliza el dominio: Google exige URLs absolutas con protocolo y sin "/" final
+function normalizeSiteUrl(raw) {
+  let url = String(raw).trim().replace(/\/+$/, "");
+  if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
+  return url;
+}
+
+const SITE_URL = normalizeSiteUrl(
   process.env.SITE_URL ||
   process.env.VITE_SITE_URL ||
-  "https://www.desarrolloscn.com"; // <- cámbialo si quieres
+  "https://www.desarrolloscn.com"
+);
 
 // Rutas estáticas de tu sitio
 const STATIC_ROUTES = [
   "/",           // Home
   "/contacto",   // Contacto
-  // Si tienes una landing de proyectos, descomenta:
-  // "/proyectos",
 ];
 
 // Prioridades sugeridas
@@ -33,6 +38,10 @@ function toISODate(date = new Date()) {
   return date.toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
+function escapeXml(s) {
+  return s.replace(/[<>&'"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" }[c]));
+}
+
 async function readProjects() {
   try {
     const raw = await fsp.readFile(PROJECTS_JSON, "utf-8");
@@ -41,7 +50,7 @@ async function readProjects() {
     // Espera objetos { slug: string, ... }
     return arr
       .filter((p) => p && typeof p.slug === "string" && p.slug.trim() !== "")
-      .map((p) => `/proyectos/${p.slug}`);
+      .map((p) => `/proyectos/${encodeURIComponent(p.slug)}`);
   } catch (err) {
     // Si no existe o hay error, seguimos con rutas estáticas
     console.warn("[sitemap] No se pudo leer projects.json:", err.message);
@@ -53,7 +62,7 @@ function buildSitemapXml(urls) {
   const lastmod = toISODate();
   const xmlItems = urls
     .map((u) => {
-      const loc = `${SITE_URL}${u}`;
+      const loc = escapeXml(`${SITE_URL}${u}`);
       const priority = PRIORITY_BY_PATH(u).toFixed(1);
       return `
   <url>
@@ -65,18 +74,9 @@ function buildSitemapXml(urls) {
     .join("");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
->
-${xmlItems}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${xmlItems}
 </urlset>
 `;
-}
-
-async function ensurePublicDir() {
-  try {
-    await fsp.mkdir(PUBLIC_DIR, { recursive: true });
-  } catch {}
 }
 
 async function writeRobotsTxt() {
@@ -91,7 +91,7 @@ Sitemap: ${SITE_URL}/sitemap.xml
 }
 
 async function main() {
-  await ensurePublicDir();
+  await fsp.mkdir(PUBLIC_DIR, { recursive: true });
 
   const dynamicRoutes = await readProjects();
   const allRoutes = Array.from(new Set([...STATIC_ROUTES, ...dynamicRoutes])).sort();
@@ -99,9 +99,8 @@ async function main() {
   const xml = buildSitemapXml(allRoutes);
   const out = path.join(PUBLIC_DIR, "sitemap.xml");
   await fsp.writeFile(out, xml, "utf-8");
-  console.log(`[sitemap] sitemap.xml generado con ${allRoutes.length} rutas -> ${out}`);
+  console.log(`[sitemap] sitemap.xml generado con ${allRoutes.length} rutas (${SITE_URL}) -> ${out}`);
 
-  // Opcional: genera/actualiza robots.txt
   await writeRobotsTxt();
 }
 

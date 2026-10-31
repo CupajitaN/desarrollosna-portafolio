@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { site } from "../../../infrastructure/config/site";
 
 type SeoProps = {
   title?: string;
@@ -6,21 +7,23 @@ type SeoProps = {
   ogImage?: string; // puede ser /preview.png o URL absoluta
   type?: "website" | "article";
   noIndex?: boolean;
-  canonical?: string; // opcional, por defecto location.href
+  path?: string; // ruta canónica, p. ej. "/contacto"; por defecto la actual
+  jsonLd?: Record<string, unknown>; // datos estructurados específicos de la página
 };
 
 export function Seo({
-  title = "Desarrollos NA | Portafolio",
+  title = "Desarrollos NA | Desarrollo web a la medida en Colombia",
   description = "Soluciones digitales modernas: sitios web, aplicaciones y sistemas escalables hechos a medida.",
   ogImage = "/preview.png",
   type = "website",
   noIndex = false,
-  canonical,
+  path,
+  jsonLd,
 }: SeoProps) {
   useEffect(() => {
-    const origin = window.location.origin;
-    const url = canonical || window.location.href;
-    const absoluteOg = ogImage?.startsWith("http") ? ogImage : `${origin}${ogImage}`;
+    // Siempre se usa el dominio de producción para que Google no indexe duplicados (www vs. sin www, previews, etc.)
+    const url = `${site.url}${path ?? window.location.pathname}`;
+    const absoluteOg = ogImage?.startsWith("http") ? ogImage : `${site.url}${ogImage}`;
 
     const setMeta = (name: string, content: string, attr: "name" | "property" = "name") => {
       if (!content) return;
@@ -45,6 +48,8 @@ export function Seo({
     setMeta("og:type", type, "property");
     setMeta("og:image", absoluteOg, "property");
     setMeta("og:url", url, "property");
+    setMeta("og:site_name", site.name, "property");
+    setMeta("og:locale", "es_CO", "property");
 
     // Twitter Cards
     setMeta("twitter:card", "summary_large_image", "name");
@@ -61,19 +66,25 @@ export function Seo({
     }
     linkCanonical.setAttribute("href", url);
 
-    // Robots (noindex)
-    let robotsEl = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
-    if (noIndex) {
-      if (!robotsEl) {
-        robotsEl = document.createElement("meta");
-        robotsEl.setAttribute("name", "robots");
-        document.head.appendChild(robotsEl);
-      }
-      robotsEl.setAttribute("content", "noindex, nofollow");
-    } else if (robotsEl) {
-      robotsEl.remove();
+    // Robots
+    setMeta(
+      "robots",
+      noIndex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1",
+      "name"
+    );
+
+    // JSON-LD propio de la página (el global del negocio vive en index.html)
+    const existing = document.getElementById("page-jsonld");
+    if (jsonLd) {
+      const script = existing ?? document.createElement("script");
+      script.id = "page-jsonld";
+      script.setAttribute("type", "application/ld+json");
+      script.textContent = JSON.stringify(jsonLd);
+      if (!existing) document.head.appendChild(script);
+    } else if (existing) {
+      existing.remove();
     }
-  }, [title, description, ogImage, type, noIndex, canonical]);
+  }, [title, description, ogImage, type, noIndex, path, jsonLd]);
 
   return null;
 }
