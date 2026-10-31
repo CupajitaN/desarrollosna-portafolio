@@ -1,0 +1,10 @@
+{
+  "name": "Desarrollos NA",
+  "short_name": "Desarrollos NA",
+  "description": "Desarrollo web a la medida para pymes y emprendedores.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050b18",
+  "theme_color": "#050b18",
+  "icons": [{ "src": "/favicon.png", "type": "image/png", "sizes": "any" }]
+}

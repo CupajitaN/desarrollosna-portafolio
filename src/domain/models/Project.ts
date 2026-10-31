@@ -7,4 +7,6 @@ export interface Project {
   cover: string;
   images: string[];
   url?: string;
+  video?: string; // recorrido corto en .mp4/.webm, se reproduce sin sonido
+
 }

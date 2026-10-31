@@ -1,14 +1,84 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-CO">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/src/style.css" rel="stylesheet">
-    <title>Desarrollos NA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Desarrollos NA | Desarrollo web a la medida en Colombia</title>
+    <meta name="description" content="Diseño y desarrollo de sitios web, aplicaciones y tiendas online rápidas, seguras y escalables para pymes y emprendedores. Cotiza tu proyecto hoy." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content="Nicolás Cupajita" />
+    <meta name="theme-color" content="#050b18" />
+    <meta name="color-scheme" content="dark" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Vista previa al compartir (redes sociales no ejecutan JavaScript) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Desarrollos NA" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:url" content="https://www.desarrolloscn.com/" />
+    <meta property="og:title" content="Desarrollos NA | Desarrollo web a la medida en Colombia" />
+    <meta property="og:description" content="Sitios web, aplicaciones y tiendas online rápidas, seguras y escalables para pymes y emprendedores." />
+    <meta property="og:image" content="https://www.desarrolloscn.com/preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Desarrollos NA — Soluciones web rápidas, seguras y escalables" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Desarrollos NA | Desarrollo web a la medida en Colombia" />
+    <meta name="twitter:description" content="Sitios web, aplicaciones y tiendas online rápidas, seguras y escalables para pymes y emprendedores." />
+    <meta name="twitter:image" content="https://www.desarrolloscn.com/preview.png" />
+
+    <!-- Datos estructurados para Google -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.desarrolloscn.com/#business",
+            "name": "Desarrollos NA",
+            "url": "https://www.desarrolloscn.com/",
+            "logo": "https://www.desarrolloscn.com/favicon.png",
+            "image": "https://www.desarrolloscn.com/preview.png",
+            "description": "Desarrollo web a la medida: sitios, aplicaciones web y tiendas online para pymes y emprendedores.",
+            "email": "arturocupajita@gmail.com",
+            "areaServed": { "@type": "Country", "name": "Colombia" },
+            "address": { "@type": "PostalAddress", "addressCountry": "CO" },
+            "founder": { "@id": "https://www.desarrolloscn.com/#person" },
+            "sameAs": [
+              "https://www.instagram.com/desarrollosna",
+              "https://www.linkedin.com/in/nicolascupajita/"
+            ],
+            "knowsAbout": ["Desarrollo web", "Aplicaciones web", "E-commerce", "React", "Angular", "Spring Boot", ".NET", "Laravel", "SEO"]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://www.desarrolloscn.com/#person",
+            "name": "Nicolás Cupajita",
+            "jobTitle": "Full Stack Developer",
+            "url": "https://www.desarrolloscn.com/",
+            "sameAs": ["https://www.linkedin.com/in/nicolascupajita/"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.desarrolloscn.com/#website",
+            "url": "https://www.desarrolloscn.com/",
+            "name": "Desarrollos NA",
+            "inLanguage": "es-CO",
+            "publisher": { "@id": "https://www.desarrolloscn.com/#business" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>Desarrollos NA — Desarrollo web a la medida en Colombia</h1>
+      <p>Sitios web, aplicaciones y tiendas online rápidas, seguras y escalables. Contacto: arturocupajita@gmail.com</p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -2,19 +2,22 @@ import { useEffect, useState } from "react";
 import { useServices } from "../providers/DIProvider";
 import { Project } from "../domain/models/Project";
 
+type State = { slug: string | null; data: Project | null; error: unknown };
+
 export function useProjectBySlug(slug: string) {
   const { getProjectBySlug } = useServices();
-  const [data, setData] = useState<Project | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<unknown>(null);
+  const [state, setState] = useState<State>({ slug: null, data: null, error: null });
 
   useEffect(() => {
-    (async () => {
-      try { setData(await getProjectBySlug.execute(slug)); }
-      catch (e) { setError(e); }
-      finally { setLoading(false); }
-    })();
+    let cancelled = false;
+    getProjectBySlug.execute(slug).then(
+      (data) => { if (!cancelled) setState({ slug, data, error: null }); },
+      (error) => { if (!cancelled) setState({ slug, data: null, error }); }
+    );
+    return () => { cancelled = true; };
   }, [getProjectBySlug, slug]);
 
-  return { data, loading, error };
+  // Mientras el resultado guardado sea de otro slug, se considera que está cargando
+  const loading = state.slug !== slug;
+  return { data: loading ? null : state.data, loading, error: loading ? null : state.error };
 }

@@ -1,12 +1,111 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/space-grotesk";
 @import "tailwindcss";
 
-:root {
-  --brand-bg: #0A192F;
-  --brand-deep: #0F2747;
+@theme {
+  --color-brand-bg: #050b18;
+  --color-brand-deep: #0a1628;
+  --color-brand-surface: #0e1b33;
+  --color-brand-accent: #00c9a7;
+  --color-brand-cyan: #22d3ee;
+  --color-brand-light: #ffffff;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Inter Variable", ui-sans-serif, sans-serif;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-reverse: marquee 40s linear infinite reverse;
+  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+  --animate-spin-slow: spin 6s linear infinite;
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes aurora {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(6%, -4%, 0) scale(1.12); }
+    100% { transform: translate3d(-4%, 5%, 0) scale(0.95); }
+  }
 }
 
-html, body, #root { height: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+html, body, #root { min-height: 100%; }
 
 body {
-  background: linear-gradient(180deg, var(--brand-bg) 0%, var(--brand-deep) 100%);
+  @apply bg-brand-bg font-sans text-slate-200 antialiased;
+  background-image: linear-gradient(180deg, var(--color-brand-bg) 0%, var(--color-brand-deep) 100%);
+}
+
+::selection { @apply bg-brand-accent/30 text-white; }
+
+h1, h2, h3, h4 { @apply font-display tracking-tight; }
+
+/* Cuadrícula sutil de fondo que se desvanece hacia los bordes */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+/* Texto con degradado de marca */
+.text-gradient {
+  @apply bg-gradient-to-r from-brand-cyan via-brand-accent to-emerald-300 bg-clip-text text-transparent;
+}
+
+/* Tarjeta con brillo que sigue al cursor (usa --x / --y desde SpotlightCard) */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgb(34 211 238 / 0.55), transparent 40%);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 300ms;
+  pointer-events: none;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(500px circle at var(--x, 50%) var(--y, 50%), rgb(0 201 167 / 0.08), transparent 45%);
+  opacity: 0;
+  transition: opacity 300ms;
+  pointer-events: none;
+}
+.spotlight:hover::before,
+.spotlight:hover::after { opacity: 1; }
+
+/* Borde con degradado giratorio para la tarjeta destacada */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.border-glow {
+  --angle: 0deg;
+  background:
+    linear-gradient(var(--color-brand-surface), var(--color-brand-surface)) padding-box,
+    conic-gradient(from var(--angle), transparent 20%, var(--color-brand-cyan), var(--color-brand-accent), transparent 80%) border-box;
+  border: 1px solid transparent;
+  animation: border-spin 5s linear infinite;
+}
+@keyframes border-spin { to { --angle: 360deg; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

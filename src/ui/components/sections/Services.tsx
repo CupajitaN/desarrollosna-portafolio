@@ -1,7 +1,9 @@
-import { Zap, Globe, LayoutDashboard, ShoppingCart } from "lucide-react";
+import { Zap, Globe, LayoutDashboard, ShoppingCart, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { type ReactNode } from "react";
 import { motion } from "framer-motion";
+import { SectionHeading } from "../common/SectionHeading";
+import { SpotlightCard } from "../common/SpotlightCard";
 
 type Service = {
   icon: ReactNode;
@@ -13,92 +15,99 @@ type Service = {
 
 const services: Service[] = [
   {
-    icon: <Zap className="w-7 h-7 text-brand-accent" />,
+    icon: <Zap className="w-6 h-6" />,
     title: "Básico",
     sub: "Presencia online rápida",
     bullets: ["Landing page + contacto", "Diseño responsive", "Entrega en 7 días"],
   },
   {
-    icon: <Globe className="w-7 h-7 text-brand-accent" />,
+    icon: <Globe className="w-6 h-6" />,
     title: "Intermedio",
     sub: "Sitio corporativo completo",
     bullets: ["Web multi-sección", "Integración de APIs", "SEO básico"],
   },
   {
-    icon: <LayoutDashboard className="w-7 h-7 text-brand-accent" />,
+    icon: <LayoutDashboard className="w-6 h-6" />,
     title: "Avanzado",
     sub: "App web a medida",
     bullets: ["App web completa", "Login y roles", "Panel de administración"],
     popular: true,
   },
   {
-    icon: <ShoppingCart className="w-7 h-7 text-brand-accent" />,
+    icon: <ShoppingCart className="w-6 h-6" />,
     title: "Premium",
     sub: "Plataforma lista para escalar",
     bullets: ["Pagos online", "Deploy en la nube", "Soporte dedicado"],
   },
 ];
 
+function ServiceBody({ s }: { s: Service }) {
+  return (
+    <div className="relative flex flex-col gap-5 h-full p-7">
+      <div className="flex items-center justify-between">
+        <span className="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-cyan/20 to-brand-accent/10 border border-white/10 text-brand-cyan">
+          {s.icon}
+        </span>
+        {s.popular && (
+          <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-brand-accent text-brand-bg">
+            Más popular
+          </span>
+        )}
+      </div>
+      <div>
+        <h3 className="text-2xl font-bold text-white">{s.title}</h3>
+        <p className="text-slate-400 text-sm mt-1">{s.sub}</p>
+      </div>
+      <ul className="text-slate-300 text-sm space-y-3 flex-1 pt-5 border-t border-white/10">
+        {s.bullets.map((b) => (
+          <li key={b} className="flex gap-2.5 items-start">
+            <Check className="w-4 h-4 mt-0.5 shrink-0 text-brand-accent" /> {b}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function Services() {
   return (
-    <section id="servicios" className="py-20 px-4 md:px-8 max-w-6xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-white">SERVICIOS</h2>
-        <div className="h-[3px] w-24 mt-4 bg-brand-accent" />
-      </motion.div>
+    <section id="servicios" className="py-24 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <SectionHeading
+          eyebrow="Servicios"
+          title={<>Planes a la medida de <span className="text-gradient">tu etapa</span></>}
+          description="Desde tu primera landing hasta una plataforma completa. Cada plan incluye diseño responsive, buenas prácticas de seguridad y acompañamiento."
+        />
+        <Link
+          to="/contacto"
+          className="shrink-0 inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white hover:bg-white/[0.06] transition"
+        >
+          Cotizar mi proyecto →
+        </Link>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 28 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="mt-10 rounded-2xl bg-white/5 backdrop-blur-sm p-8 shadow-lg border border-white/10"
-      >
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 pt-5">
-          {services.map((s) => (
-            <div
-              key={s.title}
-              className={`relative rounded-2xl p-6 border flex flex-col gap-4 transition ${
-                s.popular
-                  ? "bg-brand-accent/10 border-brand-accent/50 shadow-lg shadow-brand-accent/10"
-                  : "bg-slate-900/60 border-slate-800 hover:border-brand-accent/30"
-              }`}
-            >
-              {s.popular && (
-                <span className="absolute -top-5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold bg-brand-accent text-brand-bg whitespace-nowrap shadow-md shadow-brand-accent/30">
-                  ✦ Más popular
-                </span>
-              )}
-              {s.icon}
-              <div>
-                <h3 className="text-xl font-semibold text-white">{s.title}</h3>
-                <p className="text-brand-accent text-xs mt-0.5">{s.sub}</p>
-              </div>
-              <ul className="text-slate-300 text-sm space-y-2 flex-1">
-                {s.bullets.map((b) => (
-                  <li key={b} className="flex gap-2 items-start">
-                    <span className="text-brand-accent mt-0.5 shrink-0">●</span> {b}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 text-center">
-          <Link
-            to="/contacto"
-            className="inline-flex items-center gap-2 bg-brand-accent hover:bg-emerald-400 text-brand-bg font-semibold py-3 px-8 rounded-xl transition shadow-lg shadow-brand-accent/25"
+      <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {services.map((s, i) => (
+          <motion.div
+            key={s.title}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
+            whileHover={{ y: -6 }}
           >
-            Solicitar cotización →
-          </Link>
-        </div>
-      </motion.div>
+            {s.popular ? (
+              <div className="border-glow h-full rounded-3xl shadow-2xl shadow-brand-accent/10">
+                <ServiceBody s={s} />
+              </div>
+            ) : (
+              <SpotlightCard className="h-full">
+                <ServiceBody s={s} />
+              </SpotlightCard>
+            )}
+          </motion.div>
+        ))}
+      </div>
     </section>
   );
 }

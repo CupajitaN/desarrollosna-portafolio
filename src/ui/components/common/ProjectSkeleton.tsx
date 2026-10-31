@@ -1,14 +1,14 @@
 export function ProjectSkeleton() {
   return (
-    <div className="rounded-2xl overflow-hidden bg-slate-900/60 border border-slate-800 animate-pulse">
-      <div className="aspect-video bg-slate-800/80" />
-      <div className="p-5 space-y-3">
-        <div className="h-4 bg-slate-800 rounded w-2/3" />
-        <div className="h-3 bg-slate-800 rounded w-full" />
-        <div className="h-3 bg-slate-800 rounded w-5/6" />
-        <div className="flex gap-2 mt-4">
-          <div className="h-5 w-16 bg-slate-800 rounded-full" />
-          <div className="h-5 w-16 bg-slate-800 rounded-full" />
+    <div className="rounded-3xl overflow-hidden bg-white/[0.03] border border-white/10 animate-pulse">
+      <div className="aspect-[16/10] bg-white/[0.05]" />
+      <div className="p-6 space-y-3">
+        <div className="h-5 bg-white/[0.06] rounded w-1/2" />
+        <div className="h-3 bg-white/[0.05] rounded w-full" />
+        <div className="h-3 bg-white/[0.05] rounded w-5/6" />
+        <div className="flex gap-2 pt-3">
+          <div className="h-6 w-16 bg-white/[0.05] rounded-full" />
+          <div className="h-6 w-16 bg-white/[0.05] rounded-full" />
         </div>
       </div>
     </div>
